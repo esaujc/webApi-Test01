@@ -2,9 +2,13 @@
 const express = require('express');
 const router = express.Router();
 
-/* GET policies listing. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
-});
+const policiesController = require('../controllers/policies-controller');
+
+// GET policies listing
+router.get('/', policiesController.getPolicies);
+
+router.get('/client/:clientId', policiesController.getPolicyByClientId);
+
+router.get('/id/:id', policiesController.getPolicyById);
 
 module.exports = router;
