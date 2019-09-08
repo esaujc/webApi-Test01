@@ -9,7 +9,11 @@ const usersController = require('../controllers/users-controller');
 //   res.send('respond with a resource');
 // });
 
+// GET users listing
 router.get('/', usersController.getUsers);
 
+router.get('/id/:id', usersController.getUserById);
+
+router.get('/name/:name', usersController.getUserByName);
 
 module.exports = router;
