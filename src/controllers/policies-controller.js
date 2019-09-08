@@ -3,7 +3,7 @@ const axios = require('axios');
 const _ = require('lodash');
 
 const getPolicies =  async (req, res, next) => {
-    axios.get('http://www.mocky.io/v2/580891a4100000e8242b75c5')
+    await axios.get('http://www.mocky.io/v2/580891a4100000e8242b75c5')
     .then(response => {
         res.status(200);
         res.send(response.data);
@@ -16,7 +16,8 @@ const getPolicies =  async (req, res, next) => {
 
 const getPolicyById =  async (req, res, next) => {
     const policyId = req.params.id;
-    axios.get('http://www.mocky.io/v2/580891a4100000e8242b75c5')
+    
+    await axios.get('http://www.mocky.io/v2/580891a4100000e8242b75c5')
     .then(response => {
         const resultPolicy = _.filter(response.data.policies, policy => policy.id == policyId);
         if (resultPolicy[0]){
@@ -36,7 +37,6 @@ const getPolicyById =  async (req, res, next) => {
                 res.status(500);
                 res.send(error);
             });
-
         }else{
             res.status(404);
             res.send('Policy not found')
@@ -50,7 +50,7 @@ const getPolicyById =  async (req, res, next) => {
 
 const getPolicyByClientId =  async (req, res, next) => {
     const userClientId = req.params.clientId;
-    axios.get('http://www.mocky.io/v2/580891a4100000e8242b75c5')
+    await axios.get('http://www.mocky.io/v2/580891a4100000e8242b75c5')
     .then(response => {
         const result = _.filter(response.data.policies, policy => policy.clientId == userClientId);
         if (result[0]){

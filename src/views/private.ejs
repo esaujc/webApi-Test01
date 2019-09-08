@@ -7,9 +7,12 @@
   <body>
     <h1><%= title %></h1>
     <p>Welcome to <%= title %></p>
-    <form action="/users" method="POST">
-      <label>User:</label><input type="text" name="id"><br/>
+    <a href="/users">Go to list of Users</a>
+    <form action="/users/id" method="GET">
+      <label>User Id:</label><br/>
+      <input type="text" size="50" name="userId">
       <input type="submit" value="Login">
     </form>
+    
   </body>
 </html>

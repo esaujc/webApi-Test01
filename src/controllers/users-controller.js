@@ -2,8 +2,9 @@
 const axios = require('axios');
 const _ = require('lodash');
 
+
 const getUsers =  async (req, res, next) => {
-    axios.get('http://www.mocky.io/v2/5808862710000087232b75ac')
+    await axios.get('http://www.mocky.io/v2/5808862710000087232b75ac')
     .then(response => {
         res.status(200);
         res.send(response.data);
@@ -16,12 +17,12 @@ const getUsers =  async (req, res, next) => {
 
 const getUserById =  async (req, res, next) => {
     const userId = req.params.id;
-    axios.get('http://www.mocky.io/v2/5808862710000087232b75ac')
+    await axios.get('http://www.mocky.io/v2/5808862710000087232b75ac')
     .then(response => {
         const result = response.data.clients.filter(user => user.id == userId)
         if (result[0]){
             res.status(200);
-            res.send(result[0])
+            res.send(result[0]);
         }else{
             res.status(404);
             res.send('User not found')
@@ -35,12 +36,12 @@ const getUserById =  async (req, res, next) => {
 
 const getUserByName =  async (req, res, next) => {
     const userName = req.params.name;
-    axios.get('http://www.mocky.io/v2/5808862710000087232b75ac')
+    await axios.get('http://www.mocky.io/v2/5808862710000087232b75ac')
     .then(response => {
         const result = _.filter(response.data.clients, user => user.name == userName);
         if (result[0]){
             res.status(200);
-            res.send(result[0])
+            res.send(result[0]);
         }else{
             res.status(404);
             res.send('User not found')
@@ -52,9 +53,33 @@ const getUserByName =  async (req, res, next) => {
     });
 }
 
+const authentication =  async (req, res, next) => {
+    const userId = req.body.id;
+    await axios.get('http://www.mocky.io/v2/5808862710000087232b75ac')
+    .then(response => {
+        const result = response.data.clients.filter(user => user.id == userId)
+        if (result[0]){
+            req.session.currentUser = userId;
+            // req.session.role = result[0].role;
+            res.status(200);
+            // res.send(result[0])
+            res.redirect('/private')
+        }else{
+            res.status(404);
+            res.redirect('/');
+            // res.send('User not found');
+        }
+    })
+    .catch(error => {
+        res.status(500);
+        res.send(error);
+    });
+}
+
 module.exports = {
     getUsers,
     getUserById,
-    getUserByName
+    getUserByName,
+    authentication
 
 }
