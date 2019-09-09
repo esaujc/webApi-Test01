@@ -6,7 +6,8 @@ const getPolicies =  async (req, res, next) => {
     await axios.get('http://www.mocky.io/v2/580891a4100000e8242b75c5')
     .then(response => {
         res.status(200);
-        res.send(response.data);
+        // res.send(response.data);
+        return res.render('policies', { policies: response.data.policies });
     })
     .catch(error => {
         res.status(500);

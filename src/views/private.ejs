@@ -1,18 +1,52 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= title %></title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script type='text/javascript'>
+        function concatUserId() {
+          if (document.getElementById("userId").value !== ''){
+            url = '/users/id/' + document.getElementById("userId").value;
+            window.open(url, '_self');
+          }
+        }
+      function concatPolId() {
+        if (document.getElementById("polId").value !== ''){
+          url = '/policies/policy/' + document.getElementById("polId").value
+          window.open(url, '_self');
+        }
+      }
+      function concatClientId() {
+        if (document.getElementById("cliId").value !== ''){
+          url = '/policies/client/' + document.getElementById("cliId").value;
+          window.open(url, '_self');
+        }
+      }
+    </script>
   </head>
   <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-    <a href="/users">Go to list of Users</a>
-    <form action="/users/id" method="GET">
-      <label>User Id:</label><br/>
-      <input type="text" size="50" name="userId">
-      <input type="submit" value="Login">
-    </form>
-    
+    <H1>Welcome <%= name %></H1>
+    <p>Role: <%= role %></p>
+    <div>
+      <a href="/users">Go to list of Users</a>
+      <form>
+          <label>User Id: </label><input type="text" size="40" id="userId">
+        </form><br/>
+      <button onclick="concatUserId()">User Detail</button><br/>
+      <hr/>
+    </div>
+    <% if (role === 'admin') { %>
+      <div>
+        <a href="/policies">Go to list of Policies</a><br/>
+        <label>Policies per User</label><br/>
+        <form>
+          <label>Policy Id: </label><input type="text" size="40" id="polId">
+        </form><br/>
+        <button onclick="concatPolId()">Client associated with this Policy</button><br/><hr/>
+        <form>
+            <label>Client Id: </label><input type="text" size="40" id="cliId">
+          </form><br/>
+        <button onclick="concatClientId()">Policies by Client</button>
+      </div>
+    <% } %>
   </body>
 </html>

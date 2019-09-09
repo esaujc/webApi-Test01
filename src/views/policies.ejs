@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>List of Users/Clients</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1>List of Policies. Select one client from a Policy and see all the policies associated. </h1>
+    <% policies.forEach(policy => { %>
+      <div>
+        <div>
+          <h3><%= policy.id %></h3>
+        </div>
+        <div>
+              <div><label>Policy Id: </label><%= policy.id %></div>
+              <div><label>Email: </label><%= policy.email %></div>
+              <div><label>Client Id: </label><%= policy.clientId %></div>            
+            <a href="/policies/client/<%= policy.clientId %>"><button class="button">See details</button></a>
+        </div>
+      </div>
+    <% }) %>
+    
+  </body>
+</html>

@@ -8,9 +8,9 @@ const usersController = require('../controllers/users-controller');
 // GET users listing
 router.get('/',middlewares.isLoggedIn, usersController.getUsers);
 
-router.get('/id/:id', usersController.getUserById);
+router.get('/id/:id', middlewares.isLoggedIn, usersController.getUserById);
 
-router.get('/name/:name', usersController.getUserByName);
+router.get('/name/:name', middlewares.isLoggedIn, usersController.getUserByName);
 
 router.post('/', usersController.authentication);
 

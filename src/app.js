@@ -30,6 +30,8 @@ app.use(session({
 
 app.use((req, res, next) => {
   app.locals.currentUser = req.session.currentUser;
+  app.locals.role = req.session.role;
+  app.locals.name = req.session.name;
   next();
 });
 
