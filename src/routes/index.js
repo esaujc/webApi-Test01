@@ -16,7 +16,7 @@ router.get('/private', middlewares.isLoggedIn, function(req, res, next) {
 });
 
 
-router.post('/',  async (req, res, next) => {
+router.post('/private',  async (req, res, next) => {
   const userId = req.body.id;
   await axios.get('http://www.mocky.io/v2/5808862710000087232b75ac')
   .then(response => {
